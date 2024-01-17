@@ -1,0 +1,76 @@
+#lang racket
+#|
+In Java
+if ()
+ action2();
+else if ()
+ action3();
+|#
+
+(define (branch-example x)
+  (cond
+    ((integer? x)
+     (display "This is an integer");(predicate) (result)) pairs, or ((condition) (result)
+     (display "I can do two things!"))
+    ((real? x)
+     (display "This number is at least real")
+     (display "Another line!"))
+    (else
+     (display "This is neither real nor an integer")
+     (display "Yet more lines"))))
+
+#| boolean functions:
+ f>
+ f<
+ f =
+ f<=
+ f >=
+ (null ?
+ (exact ? - exact number like a fraction or an intenger
+ (inexact ? - not exact
+ (integer ?
+ (number ?
+ (string ?
+ (zero ? 
+|#
+
+(cons 1 2)
+(cons (cons 1 2) 3)
+(define silly (cons 1 2))
+(car silly) ; contents of the address registers
+(cdr silly) ; contents of the deca registers
+(cons 1 null)
+; ' interpret these as a list
+; null is called the empty list in scheme
+(cons 1 (cons 2 (cons 3 null))); the dot was a warning you put data on the right, where data doesn't belong
+
+;what will these output?
+(define mylist (cons 1 (cons 2 (cons 3 null))))
+(car mylist) ; gives you the left
+(cdr mylist) ; gives you the right
+
+(define (listsum x)
+  (cond
+    ((null? x)
+       0)
+    (else
+     (+ (car x) (listsum (cdr x))))))
+
+;Define a small list
+(define bcd (cons 'b (cons 'c (cons 'd null))))
+
+(define ef (cons 'e (cons 'f null)))
+
+(define g (cons 'g null))
+
+(cons (cons 'a (cons bcd (cons ef null))) g)
+
+(define twisty '((a (b c d) (e f)) g))
+(car twisty)
+(car (car twisty))
+(car (car (cdr (car twisty))))
+(car (cdr (cdr (car twisty))))
+(caar twisty)
+(caadar twisty)
+(caddar twisty)
+    

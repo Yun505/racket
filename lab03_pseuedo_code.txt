@@ -1,0 +1,42 @@
+
+Evaluate shift set to false
+	if list empty
+		if operation empty
+			return operand
+		else
+			//keep recursing????? but no cdr? [keep recursing and appending (car operations) to operands
+	else
+		if number
+			append to operands
+		else
+			if current  equals "(":
+				append to operator
+				set shift to false
+				(evaluate (cdr list) operand operator) 
+			if current equals ")":
+				set shift to true:
+				(evaluate (cdr list) (operand) (operator)) [need a way for the program to know whether it should shift]
+		if shift is false:
+			if operators is not empty:
+				if (car operators) >=  current:
+					pop from operators
+					append current to operators
+					append  (car operators) to operands
+(evaluate
+				else
+					append current to operators
+
+			else
+				recurse add to operators
+
+	
+
+[2 * ( 3 + 4 )] [] []
+[] [*] [2 3 4 +]
+1+2 *3
+
+[2*3/4] [][]
+[3/4][2][*]
+[/4][23] [*]
+[4][23*][/
+

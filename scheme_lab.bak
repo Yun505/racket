@@ -1,0 +1,10 @@
+#lang racket
+(define (y-intercept m b)
+  b
+  )
+(define (x-intercept m b)
+  (/ (* -1 b) m)
+  )
+(define (triangle-area m b)
+  
+  )

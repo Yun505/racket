@@ -1,0 +1,125 @@
+#lang racket
+#|Hayun Jung
+ Kevin Liu helped me
+ I helped Devon Lai|#
+(define (get-element list n)
+  (define (traverser i n list)
+    (cond
+      ((null? list)
+       null)
+      ((equal? i n)
+       (car list))
+      (else
+       (traverser (+ i 1) n (cdr list)))))
+  (cond
+    ((null? list)
+     null)
+    (else
+     (define i 0)
+     (traverser i n list))))
+
+(define (append-element list y)
+  (cond
+    ((null? list)
+     (cons y null))
+    ((null? (cdr list))
+     (cons (car list) (cons y null)))
+    (else
+     (cons (car list) (append-element (cdr list)  y)))))
+
+(define (append-list first second)
+  (cond
+    ((null? second)
+     first)
+    (else
+     (append-list (append-element first (car second)) (cdr second)))))
+
+(define (backwards list)
+  (cond
+    ((null? list)
+     list)
+    (else
+     (append-element (backwards (cdr list)) (car list)))))
+
+(define (paren-balanced? string (stack '()))
+  (define (check? list stack)
+    (cond
+      ((empty? list)
+       (cond
+         ((empty? stack)#t)
+         (else #f)))
+      (else
+       (cond
+         ((equal? (car list) #\()
+          (check? (cdr list) (cons ")" stack)))
+         ((equal? (car list) #\{)
+          (check? (cdr list) (cons "}" stack)))
+         ((equal? (car list) #\[)
+          (check? (cdr list) (cons "]" stack)))
+    
+         ((equal? (car list) #\))
+          (cond
+            ((equal? ")" (car stack))
+             (check? (cdr list) (cdr stack)))
+            (else
+             #f)))
+         ((equal? (car list) #\})
+          (cond
+            ((equal? "}" (car stack))
+             (check? (cdr list) (cdr stack)))
+            (else
+             #f)))
+         ((equal? (car list) #\])
+          (cond
+            ((equal? "]" (car stack))
+             (check? (cdr list) (cdr stack)))
+            (else
+             #f)))
+     
+     (else
+      (check? (cdr list) stack))))))
+  
+  (check? (string->list string) stack))
+
+;test cases
+(displayln "Test for get-element:")
+(displayln "(get-element '(1 2 3) 0) -> 1")
+(get-element '(1 2 3) 0)
+(displayln "(get-element '(() 2) 0) -> '()")
+(get-element '(() 2) 0)
+(displayln "(get-element '(1 2 3) -1) -> '()")
+(get-element '(1 2 3) -1)
+(displayln "(get-element '(1 2 3) 3) -> '()")
+(get-element '(1 2 3) 3)
+
+(displayln "Test for append-element:")
+(displayln "(append-element '(1 2 4) 0) -> '(1 2 4 0)")
+(append-element '(1 2 4) 0)
+(displayln "(append-element '() null) -> '(())")
+(append-element '() null)
+
+(displayln "Test for append-list:")
+(displayln "(append-list '(1 2 3) '(4 5 6)) -> '(1 2 3 4 5 6)")
+(append-list '(1 2 3) '(4 5 6))
+(displayln "(append-list '(1 2 3) '()) -> '(1 2 3)")
+(append-list '(1 2 3) '())
+(displayln "(append-list '() '()) -> '()")
+(append-list '() '())
+
+(displayln "Test for backwards:")
+(displayln "(backwards '(1 2 3)) -> '(3 2 1)")
+(backwards '(1 2 3))
+(displayln "(backwards '()) -> '()")
+(backwards '())
+
+(displayln "Test for paren-balanced:")
+(displayln "(paren-balanced? \"potatoes are cool but []{} no\") -> #t")
+(paren-balanced? "potatoes are cool but []{} no")
+(displayln "(paren-balanced? \"\") -> #t")
+(paren-balanced? "")
+(displayln "(paren-balanced? \"[[[\") -> #f")
+(paren-balanced? "[[[")
+(displayln "(paren-balanced? \"askldjflks;fjsd[[[]]]\") -> #t")
+(paren-balanced? "askldjflks;fjsd[[[]]]")
+(displayln "(paren-balanced? \"123(([[\") -> #f")
+(paren-balanced? "123(([[")

@@ -1,0 +1,71 @@
+(DFA input Sigma S s0 Delta F)
+	(DFA_runner (string-> list input) Sigma S s0 Delta F)
+
+	(DFA_runner same inputs)
+		(null? input)
+			(final_checker s0 F)
+		(else
+			(DFA_runner (cdr input) sigma s (transition_checker (car input) current Delta))
+
+	(final_checker current F)
+		((length (filter current == F)) > 0)
+			TRUE
+		(else
+			FALSE
+	
+	(transiton_checker element current Delta)
+		(null? Delta)
+			current
+		((caar Delta) == current)
+			((cadar Delta) == (string element))
+				cadar Delta
+			(else	
+				(transition_checker element current (cdr Delta)
+		(else
+			calls transition_checker again with (cdr Delta)
+		
+
+
+
+(NFA input Sigma Q qo Delta F)
+	(NFA_runner (string-> list input) Sigma Q  (cons q0 null) Delta F 0)
+
+	(NFA_runner same inputs + max)
+		(if q0 == null or max == 50)
+			FALSE
+		(null? input)
+			(final_checker q0 F)
+		(else
+			(NFA_runner (cdr input) Sigma Q (transiton_checker (car input) current Delta) Delta F (max++))
+
+	(transition_checker element current Delta)
+		(null? current)
+			NULL
+		(else
+			q0_matches = (filter for lists current == state in Delta)
+			(null? q0_matches)
+				NULL
+			(else
+				element_matches = (filter for lists element == in Delta)
+				(list? element_matches)
+					(append (caddar element_matches) + (trasition_checker with (cdr current))
+				(else
+					(cons (caddar element_matches) + (transition_checker with (cdr current))
+
+	(final_checker current F)
+		(null? current)
+			FALSE
+		( (length (filter (car q0) == F)) > 0)
+			TRUE
+		(else
+			(final_checker (cdr current) F)
+
+	(Epsilon_checker element current delta)
+		(transition_checker element (append q0 (transition_checker "" current delta)) delta)
+	
+
+
+
+
+
+		

@@ -1,0 +1,19 @@
+ParenChecker 
+paren_token_stack = [];
+
+(for int i=  0; i < array.size(); i++){
+
+	if array[i] == (:
+		array[i] = paren_token();
+		add paren_token on stack
+	elif array[i] = = ):
+		array[i] == paren_token(); 
+		take paren_token off stack after checking if there's something to match it 
+		if they are matching set them equal to each 
+	if (stakc has things):
+		return false
+
+OUTSIDE OF LOOP
+	if stack no things:
+		return true; 
+
